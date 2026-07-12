@@ -1,0 +1,24 @@
+{
+  "name": "ai-qa-pipeline",
+  "version": "0.1.0",
+  "description": "Vendor-agnostic, multi-agent AI QA pipeline: crawls a live app with Playwright, analyzes it (OpenAI/Anthropic or a no-key heuristic mode), generates and runs executable Playwright tests, and returns a severity-ranked report with a ship / no-ship verdict.",
+  "type": "module",
+  "author": "Muhammad Nabeel Aslam",
+  "license": "MIT",
+  "bin": {
+    "aiqa": "src/index.ts"
+  },
+  "scripts": {
+    "qa": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test:self": "tsx src/index.ts https://www.saucedemo.com --provider none --max-pages 3"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.45.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0",
+    "@types/node": "^20.14.0"
+  }
+}
