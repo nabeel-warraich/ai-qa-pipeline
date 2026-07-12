@@ -25,6 +25,11 @@ export async function explore(
   const browser = await chromium.launch();
   const context = await browser.newContext();
 
+  // tsx/esbuild wraps functions with a `__name` helper; when page.evaluate() ships
+  // a function into the browser that helper is undefined there. Define it up front
+  // (passed as a STRING so it isn't itself transpiled).
+  await context.addInitScript("globalThis.__name = globalThis.__name || ((t) => t);");
+
   try {
     while (queue.length && pages.length < maxPages) {
       const url = queue.shift()!;
